@@ -36,13 +36,13 @@
 //!   let mut queens = vec![];
 //!   // 2 queens can't share the same line.
 //!   for _ in 0..n {
-//!     queens.push(Box::new(space.vstore.alloc(IntervalSet::new(1, n as i32))) as Var<VStore>);
+//!     queens.push(Box::new(space.vstore.alloc(IntervalSet::new(1, n as isize))) as Var<VStore>);
 //!   }
 //!   for i in 0..n-1 {
 //!     for j in i + 1..n {
 //!       // 2 queens can't share the same diagonal.
-//!       let q1 = (i + 1) as i32;
-//!       let q2 = (j + 1) as i32;
+//!       let q1 = (i + 1) as isize;
+//!       let q2 = (j + 1) as isize;
 //!       // Xi + i != Xj + j reformulated as: Xi != Xj + j - i
 //!       space.cstore.alloc(Box::new(XNeqY::new(
 //!         queens[i].bclone(), Box::new(Addition::new(queens[j].bclone(), q2 - q1)) as Var<VStore>)));
@@ -83,19 +83,19 @@
 //! }
 //! ```
 
-extern crate trilean;
-extern crate interval;
-extern crate gcollections;
-extern crate num;
-extern crate vec_map;
 extern crate bit_set;
+extern crate gcollections;
+extern crate interval;
+extern crate num;
+extern crate trilean;
+extern crate vec_map;
 
+pub mod concept;
 pub mod kernel;
 pub mod logic;
+pub mod model;
 pub mod propagation;
 pub mod propagators;
+pub mod search;
 pub mod term;
 pub mod variable;
-pub mod search;
-pub mod concept;
-pub mod model;

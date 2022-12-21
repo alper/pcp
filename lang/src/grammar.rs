@@ -128,7 +128,7 @@ grammar! pcp {
     / "usize" > make_usize
     / "i8" > make_i8
     / "i16" > make_i16
-    / "i32" > make_i32
+    / "isize" > make_isize
     / "i64" > make_i64
     / "isize" > make_isize
 
@@ -249,7 +249,7 @@ grammar! pcp {
   fn make_usize() -> LitIntType { LitIntType::Unsigned(UintTy::Us) }
   fn make_i8() -> LitIntType { LitIntType::Signed(IntTy::I8) }
   fn make_i16() -> LitIntType { LitIntType::Signed(IntTy::I16) }
-  fn make_i32() -> LitIntType { LitIntType::Signed(IntTy::I32) }
+  fn make_isize() -> LitIntType { LitIntType::Signed(IntTy::isize) }
   fn make_i64() -> LitIntType { LitIntType::Signed(IntTy::I64) }
   fn make_isize() -> LitIntType { LitIntType::Signed(IntTy::Is) }
 
@@ -358,7 +358,7 @@ mod test
   fn test_grammar()
   {
     let state = pcp::recognize_program(
-      "let x = variables <- 9i32 .. 100;
+      "let x = variables <- 9isize .. 100;
       constraints <- x*1 > y + (z - 9);
       let y = variables <- 0..0;".into_state());
     match state.into_result() {
